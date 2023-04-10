@@ -1,11 +1,12 @@
 import React, {useRef, useState, useEffect} from 'react'
 import {Input} from '@mui/material'
 import SendIcon from '@mui/icons-material/Send';
-
+import style from './Chat.module.css'
 
 
 export default function Chat({socket}){
 
+    const bottomRef = useRef()
     const messageRef = useRef()
     const [messageList, setMessageList] = useState([])
 
@@ -18,7 +19,7 @@ export default function Chat({socket}){
     }, [socket])
 
     useEffect(() =>{
-        scrolDown()
+        scrollDown()
 
     }, [messageList])
 
@@ -45,13 +46,13 @@ export default function Chat({socket}){
     }
 
     const scrollDown = () =>{
-        bottomRef.current.scriollIntoView({behavior: 'smooth'})
+        bottomRef.current.scrollIntoView({behavior: 'smooth'})
     }
 
     return(
         <div>
             <div className={style['chat-container']}>
-                <div className={style['chat-body']}>
+                <div className={style["chat-body"]}>
                     {
                         messageList.map((message, index) =>(
                             <div className={`${style["message-container"]} ${message.authorId === socket.id && style["message-mine"]}`} key={index}>
@@ -63,7 +64,7 @@ export default function Chat({socket}){
                     <div ref={bottomRef} />
                     </div>
                     <div className={style["chat-footer"]}>
-                        <Input inputRef={messageRef} placeholder='Message' onKeyDown={(e)=>getEnterKey(e)} fullWidth></Input>
+                        <Input inputRef={messageRef} placeholder='Message' onKeyDown={(e)=>getEnterKey(e)} fullWidth/>
                         <SendIcon sx={{m:1, cursor:'pointer'}} onClick={()=>handleSubmit()} color="primary"/>
                     </div>
             </div>
