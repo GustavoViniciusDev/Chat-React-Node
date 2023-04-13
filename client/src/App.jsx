@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       {
-        chatVisibility ? <Chat  socket={socket}/> : <Join  setSocket={setSocket} setChatVisibility={setChatVisibility}/>
+        chatVisibility ? <Chat  socket={socket} setChatVisibility={setChatVisibility} /> : <Join  setSocket={setSocket} setChatVisibility={setChatVisibility}/>
       }
       
     </div>
